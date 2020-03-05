@@ -33,8 +33,34 @@ class App extends React.Component {
 
       <div className="App">
         <div className='rom-file'>
-          <label htmlFor="file">&#x1F4BE; Choose ROM</label>
-          <input type='file' id='file' accept='.nes' onChange={(e) => { this.onChange(e) }} />
+          <fieldset>
+            <legend>NES ROM</legend>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Rom File</td>
+                    <td><input type='file' id='file' accept='.nes' onChange={(e) => { this.onChange(e) }} />
+                  </td>
+                  </tr>
+                </tbody>
+                {state && state.file && state.rom &&
+                  <tbody>
+                    <tr>
+                      <td>FileName</td>
+                      <td>{state.file.name}</td>
+                    </tr>
+                    <tr>
+                      <td>FileSize</td>
+                      <td>{state.file.size}</td>
+                    </tr>
+                    <tr>
+                      <td>Format</td>
+                      <td>{state.rom.format}</td>
+                    </tr>
+                  </tbody>
+                }
+              </table>
+            </fieldset>
         </div>
         {state &&
           <RomData {...state} />

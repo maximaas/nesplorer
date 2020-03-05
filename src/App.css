@@ -6,27 +6,23 @@ table {
 
 table td {
   border-width: 1px;
-  border-style: inset;
   padding: 5px;
-  background-color: #e9e9e9;
 }
 
-input[type=file] {
-  display: none;
-}
-
-label {
-  display: inline-block;
-  border: 2px outset;
-  background-color: #e2e2e2;
-  padding: 5px;
+table tr td:first-child {
+  text-align: right;
+  font-weight: bold;
+  width: 150px;
 }
 
 .App {
-  width: 600px;
+  width: 450px;
   margin: auto;
 }
 
+fieldset {
+  border: 1px solid #ccc;
+}
 footer {
   font-family: Arial;
   padding-top: 10px;

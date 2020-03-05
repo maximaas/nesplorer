@@ -8,24 +8,10 @@ export default class RomData extends React.Component {
 
     console.log(file)
 
+    const romMapperLink = `https://wiki.nesdev.com/w/index.php/INES_Mapper_${rom.mapper.toString().padStart(3, '0')}`
+
     return (
       <div className='rom'>
-      <fieldset>
-        <legend>FILE</legend>
-        <table>
-          <tbody>
-            <tr>
-              <td>File</td>
-              <td>{file.name}</td>
-            </tr>
-            <tr>
-              <td>size</td>
-              <td>{file.size}</td>
-            </tr>
-          </tbody>
-          </table>
-        </fieldset>
-
         <fieldset>
         <legend>ROM DATA</legend>
 
@@ -33,23 +19,19 @@ export default class RomData extends React.Component {
           <tbody>
             <tr>
               <td>CRC</td>
-              <td>{rom.crc32}</td>
-            </tr>
-            <tr>
-              <td>Format</td>
-              <td>{rom.version}</td>
+              <td>
+                <span style={{'textTransform': 'uppercase'}}>
+                  <input style={{'textTransform': 'uppercase'}} defaultValue={rom.crc32} readOnly={true} />
+                </span>
+              </td>
             </tr>
             <tr>
               <td>Mapper</td>
-              <td>{rom.mapper}</td>
+              <td><a href={romMapperLink} target='_blank'>{rom.mapper}</a></td>
             </tr>
             <tr>
               <td>Mirroring</td>
               <td>{rom.mirroring}</td>
-            </tr>
-            <tr>
-              <td>fourScreenVram</td>
-              <td>{rom.fourScreenVram}</td>
             </tr>
             <tr>
               <td>prgRomSize</td>
@@ -68,8 +50,12 @@ export default class RomData extends React.Component {
               <td>{rom.tvSystem}</td>
             </tr>
             <tr>
+              <td>fourScreenVram</td>
+              <td>{rom.fourScreenVram ? 'YES': 'NO'}</td>
+            </tr>
+            <tr>
               <td>battery</td>
-              <td>{rom.battery || '---'}</td>
+              <td>{rom.battery ? 'YES': 'NO'}</td>
             </tr>
             <tr>
               <td>trainer</td>
