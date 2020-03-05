@@ -2,6 +2,7 @@ import React from 'react';
 import Rom from './rom'
 import RomData from './components/RomData'
 import './App.css';
+import logo from './trix-logo.svg'
 
 
 class App extends React.Component {
@@ -14,7 +15,10 @@ class App extends React.Component {
       try {
         const rom = new Rom(data);
         this.setState((prevState, props) => {
-          return rom
+          return {
+            rom: rom.header,
+            file: file
+          }
         })
       } catch (e) {
          console.log(e.message);  // invalid nes
@@ -30,10 +34,18 @@ class App extends React.Component {
     return (
 
       <div className="App">
-        <input type='file' accept='.nes' onChange={(e) => { this.onChange(e) }} />
+        <h1>iNES Header</h1>
+        <div className='rom-file'>
+          <label htmlFor="file">&#x1F4BE; Choose ROM</label>
+          <input type='file' id='file' accept='.nes' onChange={(e) => { this.onChange(e) }} />
+        </div>
         {state &&
           <RomData {...state} />
         }
+        <footer>
+          <i>© Tomasz Mazur 2020</i>
+          <img src={logo} width='20' align='right' />
+        </footer>
       </div>
     );
   }

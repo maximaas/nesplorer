@@ -1,3 +1,45 @@
 table {
   font-family: monospace;
+  margin: auto;
+  width: 100%;
+}
+
+table td {
+  border-width: 1px;
+  border-style: inset;
+  padding: 5px;
+  background-color: #e9e9e9;
+}
+
+input[type=file] {
+  display: none;
+}
+
+label {
+  display: inline-block;
+  border: 2px outset;
+  background-color: #e2e2e2;
+  padding: 5px;
+}
+
+.App {
+  width: 600px;
+  margin: auto;
+}
+
+footer {
+  font-family: Arial;
+  padding-top: 10px;
+  margin-top: 20px;
+  font-size: 12px;
+  line-height: 20px;
+  border-top: 1px solid #000;
+}
+
+.App h1 {
+  border-bottom: 1px solid #000;
+}
+
+.rom-file {
+  margin-bottom: 20px;
 }

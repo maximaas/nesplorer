@@ -10,14 +10,15 @@ export default class Rom {
     if ((data[7] & 0b1100) >> 2 === 2) {
       version = 'NES 2.0';
     } else if (data.slice(12, 16).reduce((x, y) => x + y) === 0) {
-      version = 'iNES';
+      version = 'Standard iNES';
     } else {
       version = 'Archaic iNES';
     }
 
-    this.crc32 = crc32FromArrayBuffer(data.slice(16)).toString(16);
+    const crc32 = crc32FromArrayBuffer(data.slice(16)).toString(16)
 
     this.header = {
+      crc32:          crc32,
       prgRomSize:     data[4],
       chrRomSize:     data[5],
       mirroring:      (data[6] & 1) ? 'Vertical' : 'Horizontal',
