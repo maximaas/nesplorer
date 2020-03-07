@@ -52,12 +52,12 @@ export default class RomData extends React.Component {
               <td>{rom.prgRomSize}</td>
             </tr>
             <tr>
-              <td>chrRomSize</td>
-              <td>{rom.chrRomSize}</td>
-            </tr>
-            <tr>
               <td>prgRamSize</td>
               <td>{rom.prgRamSize}</td>
+            </tr>
+            <tr>
+              <td>chrRomSize</td>
+              <td>{rom.chrRomSize}</td>
             </tr>
             <tr>
               <td>fourScreenVram</td>
