@@ -49,15 +49,15 @@ class App extends React.Component {
                   <tbody>
 
                     <tr>
-                      <td>FileName</td>
+                      <td>File Name</td>
                       <td>{state.file.name}</td>
                     </tr>
                     <tr>
-                      <td>FileSize</td>
-                      <td>{state.file.size}</td>
+                      <td>File Size</td>
+                      <td>{state.file.size / 1000} KB</td>
                     </tr>
                     <tr>
-                      <td>Format</td>
+                      <td>Header Format</td>
                       <td>
                         {state.rom.format == 'Standard iNES' &&
                           <ExternalLink href='https://wiki.nesdev.com/w/index.php/INES' label={state.rom.format} />
