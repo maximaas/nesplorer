@@ -21,7 +21,7 @@ export default class RomData extends React.Component {
               <td>CRC</td>
               <td>
                 <span style={{'textTransform': 'uppercase'}}>
-                  <input style={{'textTransform': 'uppercase'}} defaultValue={rom.crc32} readOnly={true} />
+                  {rom.crc32}
                 </span>
               </td>
             </tr>
@@ -59,15 +59,15 @@ export default class RomData extends React.Component {
             </tr>
             <tr>
               <td>trainer</td>
-              <td>{rom.trainer}</td>
+              <td>{rom.trainer ? 'YES': 'NO'}</td>
             </tr>
             <tr>
               <td>vsUnisystem</td>
-              <td>{rom.vsUnisystem}</td>
+              <td>{rom.vsUnisystem  ? 'YES': 'NO'}</td>
             </tr>
             <tr>
               <td>playChoice10</td>
-              <td>{rom.playChoice10}</td>
+              <td>{rom.playChoice10  ? 'YES': 'NO'}</td>
             </tr>
           </tbody>
         </table>

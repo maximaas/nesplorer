@@ -45,6 +45,7 @@ class App extends React.Component {
                 </tbody>
                 {state && state.file && state.rom &&
                   <tbody>
+
                     <tr>
                       <td>FileName</td>
                       <td>{state.file.name}</td>
@@ -55,7 +56,15 @@ class App extends React.Component {
                     </tr>
                     <tr>
                       <td>Format</td>
-                      <td>{state.rom.format}</td>
+                      <td>
+                        {state.rom.format == 'Standard iNES' &&
+                          <a href='https://wiki.nesdev.com/w/index.php/INES' target='_blank'>{state.rom.format}</a>
+                        }
+
+                        {state.rom.format == 'NES 2.0' &&
+                          <a href='https://wiki.nesdev.com/w/index.php/NES_2.0' target='_blank'>{state.rom.format}</a>
+                        }
+                      </td>
                     </tr>
                   </tbody>
                 }

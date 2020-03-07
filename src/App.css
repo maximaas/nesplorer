@@ -1,5 +1,5 @@
+body {font-family: 'Share Tech Mono', monospace;width: 600px; margin: auto;}
 table {
-  font-family: monospace;
   margin: auto;
   width: 100%;
 }
@@ -12,28 +12,32 @@ table td {
 table tr td:first-child {
   text-align: right;
   font-weight: bold;
+  color: darkblue;
   width: 150px;
 }
 
 .App {
-  width: 450px;
+  width: 600px;
   margin: auto;
 }
 
 fieldset {
   border: 1px solid #ccc;
+  box-shadow: 1px 1px 0 #ccc;
 }
+
+legend {font-weight: bold;font-size: 20px; color: #333; padding: 0 20px}
 footer {
   font-family: Arial;
   padding-top: 10px;
   margin-top: 20px;
-  font-size: 12px;
-  line-height: 20px;
+  line-height: 30px;
   border-top: 1px solid #000;
 }
 
 h1 {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid;
+  padding-bottom: 20px;
 }
 
 .rom-file {
