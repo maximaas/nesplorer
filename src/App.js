@@ -29,7 +29,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { props, state } = this
+    const { state } = this
 
     return (
 
@@ -59,11 +59,11 @@ class App extends React.Component {
                     <tr>
                       <td>Header Format</td>
                       <td>
-                        {state.rom.format == 'Standard iNES' &&
+                        {state.rom.format === 'Standard iNES' &&
                           <ExternalLink href='https://wiki.nesdev.com/w/index.php/INES' label={state.rom.format} />
                         }
 
-                        {state.rom.format == 'NES 2.0' &&
+                        {state.rom.format === 'NES 2.0' &&
                           <ExternalLink href='https://wiki.nesdev.com/w/index.php/NES_2.0' label={state.rom.format} />
                         }
                       </td>
