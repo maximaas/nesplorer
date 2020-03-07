@@ -1,4 +1,5 @@
 import React from 'react';
+import ExternalLink from './ExternalLink'
 
 export default class RomData extends React.Component {
   render() {
@@ -6,9 +7,16 @@ export default class RomData extends React.Component {
 
     const { rom, file } = props
 
-    console.log(file)
-
     const romMapperLink = `https://wiki.nesdev.com/w/index.php/INES_Mapper_${rom.mapper.toString().padStart(3, '0')}`
+
+    let cabinetStyle;
+    if (rom.vsUnisystem) {
+      cabinetStyle = 'Nintendo VS. System'
+    } else if (rom.playChoice10) {
+      cabinetStyle = 'PlayChoice-10'
+    } else {
+      cabinetStyle = 'None'
+    }
 
     return (
       <div className='rom'>
@@ -27,11 +35,17 @@ export default class RomData extends React.Component {
             </tr>
             <tr>
               <td>Mapper</td>
-              <td><a href={romMapperLink} target='_blank'>{rom.mapper}</a></td>
+              <td>
+                <ExternalLink href={romMapperLink} label={rom.mapper} />
+              </td>
             </tr>
             <tr>
               <td>Mirroring</td>
               <td>{rom.mirroring}</td>
+            </tr>
+            <tr>
+              <td>TV Color System</td>
+              <td>{rom.tvColorSystem}</td>
             </tr>
             <tr>
               <td>prgRomSize</td>
@@ -46,10 +60,6 @@ export default class RomData extends React.Component {
               <td>{rom.prgRamSize}</td>
             </tr>
             <tr>
-              <td>tvSystem</td>
-              <td>{rom.tvSystem}</td>
-            </tr>
-            <tr>
               <td>fourScreenVram</td>
               <td>{rom.fourScreenVram ? 'YES': 'NO'}</td>
             </tr>
@@ -58,16 +68,12 @@ export default class RomData extends React.Component {
               <td>{rom.battery ? 'YES': 'NO'}</td>
             </tr>
             <tr>
+              <td>Cabinet</td>
+              <td>{cabinetStyle}</td>
+            </tr>
+            <tr>
               <td>trainer</td>
               <td>{rom.trainer ? 'YES': 'NO'}</td>
-            </tr>
-            <tr>
-              <td>vsUnisystem</td>
-              <td>{rom.vsUnisystem  ? 'YES': 'NO'}</td>
-            </tr>
-            <tr>
-              <td>playChoice10</td>
-              <td>{rom.playChoice10  ? 'YES': 'NO'}</td>
             </tr>
           </tbody>
         </table>

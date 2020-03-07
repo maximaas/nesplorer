@@ -20,7 +20,7 @@ export default class Rom {
       vsUnisystem:    !!(data[7] & 1),
       playChoice10:   !!(data[7] & 2),
       prgRamSize:     data[8],
-      tvSystem:       (data[9] & 1) ? 'PAL' : 'NTSC'
+      tvColorSystem:  (data[9] & 1) ? 'PAL' : 'NTSC'
     }
   }
 

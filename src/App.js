@@ -1,6 +1,7 @@
 import React from 'react';
 import Rom from './rom'
 import RomData from './components/RomData'
+import ExternalLink from './components/ExternalLink'
 import './App.css';
 
 class App extends React.Component {
@@ -22,8 +23,9 @@ class App extends React.Component {
          console.log(e.message);  // invalid nes
       }
     });
-
-    reader.readAsArrayBuffer(file);
+    if (file) {
+      reader.readAsArrayBuffer(file);
+    }
   }
 
   render() {
@@ -58,11 +60,11 @@ class App extends React.Component {
                       <td>Format</td>
                       <td>
                         {state.rom.format == 'Standard iNES' &&
-                          <a href='https://wiki.nesdev.com/w/index.php/INES' target='_blank'>{state.rom.format}</a>
+                          <ExternalLink href='https://wiki.nesdev.com/w/index.php/INES' label={state.rom.format} />
                         }
 
                         {state.rom.format == 'NES 2.0' &&
-                          <a href='https://wiki.nesdev.com/w/index.php/NES_2.0' target='_blank'>{state.rom.format}</a>
+                          <ExternalLink href='https://wiki.nesdev.com/w/index.php/NES_2.0' label={state.rom.format} />
                         }
                       </td>
                     </tr>
