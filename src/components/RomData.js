@@ -51,14 +51,12 @@ export default class RomData extends React.Component {
               <td>prgRomSize</td>
               <td>{rom.prgRomSize}</td>
             </tr>
-            <tr>
-              <td>prgRamSize</td>
-              <td>{rom.prgRamSize}</td>
-            </tr>
-            <tr>
-              <td>chrRomSize</td>
-              <td>{rom.chrRomSize}</td>
-            </tr>
+            {rom.prgRamSize > 0 &&
+              <tr>
+                <td>prgRamSize</td>
+                <td>{rom.prgRamSize}</td>
+              </tr>
+            }
             <tr>
               <td>fourScreenVram</td>
               <td>{rom.fourScreenVram ? 'YES': 'NO'}</td>
@@ -77,6 +75,18 @@ export default class RomData extends React.Component {
             </tr>
           </tbody>
         </table>
+        </fieldset>
+
+        <fieldset>
+          <legend>CHR DATA</legend>
+          <table>
+            <tbody>
+            <tr>
+              <td>chrRomSize</td>
+              <td>{rom.chrRomSize}</td>
+            </tr>
+            </tbody>
+          </table>
         </fieldset>
       </div>
     )
