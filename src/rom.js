@@ -3,7 +3,7 @@ import crc32FromArrayBuffer from './crc32';
 export default class Rom {
   constructor(data) {
     let isValid = String.fromCharCode(data[0], data[1], data[2]) === "NES";
-    if (!isValid) throw new Error('Not a valid NES file.');
+    if (!isValid) throw new Error('NES Header not found.');
 
     const crc32 = crc32FromArrayBuffer(data.slice(16)).toString(16);
 
