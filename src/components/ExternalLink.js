@@ -4,7 +4,7 @@ const ExternalLink = (props) => {
   const { href, label } = props
 
   return(
-    <a href={href} target='_blank'>{label}</a>
+    <a href={href} target='_blank' rel='noopener noreferrer'>{label}</a>
   )
 }
 

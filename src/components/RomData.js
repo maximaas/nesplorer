@@ -3,9 +3,9 @@ import ExternalLink from './ExternalLink'
 
 export default class RomData extends React.Component {
   render() {
-    const { state, props } = this
+    const { props } = this
 
-    const { rom, file } = props
+    const { rom } = props
 
     const romMapperLink = `https://wiki.nesdev.com/w/index.php/INES_Mapper_${rom.mapper.toString().padStart(3, '0')}`
 
