@@ -13,10 +13,13 @@ class App extends React.Component {
       const data = new Uint8Array(e.target.result);
       try {
         const rom = new Rom(data);
+
         this.setState((prevState, props) => {
           return {
-            rom: rom.header,
-            file: file
+            crc32:  rom.romCRC(),
+            format: rom.format(),
+            rom:    rom.header(),
+            file:   file
           }
         })
       } catch (e) {
@@ -59,12 +62,12 @@ class App extends React.Component {
                     <tr>
                       <td>Header Format</td>
                       <td>
-                        {state.rom.format === 'Standard iNES' &&
-                          <ExternalLink href='https://wiki.nesdev.com/w/index.php/INES' label={state.rom.format} />
+                        {state.format === 'Standard iNES' &&
+                          <ExternalLink href='https://wiki.nesdev.com/w/index.php/INES' label={state.format} />
                         }
 
-                        {state.rom.format === 'NES 2.0' &&
-                          <ExternalLink href='https://wiki.nesdev.com/w/index.php/NES_2.0' label={state.rom.format} />
+                        {state.format === 'NES 2.0' &&
+                          <ExternalLink href='https://wiki.nesdev.com/w/index.php/NES_2.0' label={state.format} />
                         }
                       </td>
                     </tr>

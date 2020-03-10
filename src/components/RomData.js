@@ -5,7 +5,7 @@ export default class RomData extends React.Component {
   render() {
     const { props } = this
 
-    const { rom } = props
+    const { rom, crc32 } = props
 
     const romMapperLink = `https://wiki.nesdev.com/w/index.php/INES_Mapper_${rom.mapper.toString().padStart(3, '0')}`
 
@@ -29,7 +29,7 @@ export default class RomData extends React.Component {
               <td>CRC</td>
               <td>
                 <span style={{'textTransform': 'uppercase'}}>
-                  {rom.crc32}
+                  {crc32}
                 </span>
               </td>
             </tr>
