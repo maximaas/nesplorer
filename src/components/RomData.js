@@ -5,14 +5,14 @@ export default class RomData extends React.Component {
   render() {
     const { props } = this
 
-    const { rom, crc32 } = props
+    const { romHeader, crc32 } = props
 
-    const romMapperLink = `https://wiki.nesdev.com/w/index.php/INES_Mapper_${rom.mapper.toString().padStart(3, '0')}`
+    const romMapperLink = `https://wiki.nesdev.com/w/index.php/INES_Mapper_${romHeader.mapper.toString().padStart(3, '0')}`
 
     let cabinetStyle;
-    if (rom.vsUnisystem) {
+    if (romHeader.vsUnisystem) {
       cabinetStyle = 'Nintendo VS. System'
-    } else if (rom.playChoice10) {
+    } else if (romHeader.playChoice10) {
       cabinetStyle = 'PlayChoice-10'
     } else {
       cabinetStyle = 'None'
@@ -36,34 +36,34 @@ export default class RomData extends React.Component {
             <tr>
               <td>Mapper</td>
               <td>
-                <ExternalLink href={romMapperLink} label={rom.mapper} />
+                <ExternalLink href={romMapperLink} label={romHeader.mapper} />
               </td>
             </tr>
             <tr>
               <td>Mirroring</td>
-              <td>{rom.mirroring}</td>
+              <td>{romHeader.mirroring}</td>
             </tr>
             <tr>
               <td>TV Color System</td>
-              <td>{rom.tvColorSystem}</td>
+              <td>{romHeader.tvColorSystem}</td>
             </tr>
             <tr>
-              <td>prgRomSize</td>
-              <td>{rom.prgRomSize}</td>
+              <td>prgRomBanks</td>
+              <td>{romHeader.prgRomBanks}</td>
             </tr>
-            {rom.prgRamSize > 0 &&
+            {romHeader.prgRamBanks > 0 &&
               <tr>
-                <td>prgRamSize</td>
-                <td>{rom.prgRamSize}</td>
+                <td>prgRamBanks</td>
+                <td>{romHeader.prgRamBanks}</td>
               </tr>
             }
             <tr>
               <td>fourScreenVram</td>
-              <td>{rom.fourScreenVram ? 'YES': 'NO'}</td>
+              <td>{romHeader.fourScreenVram ? 'YES': 'NO'}</td>
             </tr>
             <tr>
               <td>battery</td>
-              <td>{rom.battery ? 'YES': 'NO'}</td>
+              <td>{romHeader.battery ? 'YES': 'NO'}</td>
             </tr>
             <tr>
               <td>Cabinet</td>
@@ -71,7 +71,7 @@ export default class RomData extends React.Component {
             </tr>
             <tr>
               <td>trainer</td>
-              <td>{rom.trainer ? 'YES': 'NO'}</td>
+              <td>{romHeader.trainer ? 'YES': 'NO'}</td>
             </tr>
           </tbody>
         </table>
@@ -82,8 +82,8 @@ export default class RomData extends React.Component {
           <table>
             <tbody>
             <tr>
-              <td>chrRomSize</td>
-              <td>{rom.chrRomSize}</td>
+              <td>chrRomBanks</td>
+              <td>{romHeader.chrRomBanks}</td>
             </tr>
             </tbody>
           </table>

@@ -1,53 +1,32 @@
 import crc32FromArrayBuffer from './crc32';
+import Header from './header'
 
 export default class Rom {
-  constructor(data) {
-    if (
-         data[0] === 78 // N
-      && data[1] === 69 // E
-      && data[2] === 83 // S
-      && data[3] === 0x01a
-    ) {
-      // Every .nes file has a 16 byte header. The first 4 characters are NES\0x01a.
-      // Offsets 4 and 5 specify the number of PRG and CHR banks, respectively.
-      this.headerBytes = data.slice(0, 16);
-      this.romBytes    = data.slice(16);
-    } else {
-      throw new Error('NES Header not found.');
+  constructor(bytes) {
+    // Every .nes file has a 16 byte header. The first 4 characters are NES\0x01a.
+    // Offsets 4 and 5 specify the number of PRG and CHR banks, respectively.
+    const header = new Header(bytes.slice(0, 16))
+
+    const {prgRomBanks, chrRomBanks} = header
+
+    const romBytes    = bytes.slice(16)
+
+    // Program data. All ROMs must contain at least one bank of PRG data.
+    // This is the executable code that is stored for games/ demos.
+    // Each bank is exactly 16K (16384 bytes)
+    const prgBytes = romBytes.slice(0, header.prgRomBanks * 16384)
+
+    // Character data. Here be sprites. CHR data is just a block of sprites.
+    // Each CHR bank can contain up to 512 sprites.
+    // Since CHR banks are 8K each (8192 bytes), you can understand that each sprite is stored in 16 bytes,
+    // which brings us to our next topic. A ROM may not have any CHR banks (ie Zelda, Contra), ROMs such as these have the sprites stored in the PRG banks.
+    // I haven't yet looked into extraction from there.
+    if (chrRomBanks) {
+      const chrBytes = romBytes.slice(prgBytes.length, chrRomBanks * 8192)
     }
+
+    this.crc32  = crc32FromArrayBuffer(romBytes).toString(16)
+    this.header = header
+
   }
-
-  romCRC() {
-    return crc32FromArrayBuffer(this.romBytes).toString(16)
-  }
-
-  format() {
-    if ((this.headerBytes[7] & 0b1100) >> 2 === 2) {
-      return 'NES 2.0';
-    } else if (this.headerBytes.slice(12, 16).reduce((x, y) => x + y) === 0) {
-      return 'Standard iNES';
-    } else {
-      return 'Archaic iNES';
-    }
-  }
-  
-  header() {
-    const data = this.headerBytes;
-
-    return {
-      prgRomSize:     data[4],
-      chrRomSize:     data[5],
-      mirroring:      (data[6] & 1) ? 'Vertical' : 'Horizontal',
-      battery:        !!(data[6] & 2),
-      trainer:        !!(data[6] & 4),
-      fourScreenVram: !!(data[6] & 8),
-      mapper:         ((data[6] & 0xF0) >> 4) + (data[7] & 0xF0),
-      vsUnisystem:    !!(data[7] & 1),
-      playChoice10:   !!(data[7] & 2),
-      prgRamSize:     data[8],
-      tvColorSystem:  (data[9] & 1) ? 'PAL' : 'NTSC'
-    }
-  }
-
-
 }
