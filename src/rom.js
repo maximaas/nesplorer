@@ -22,8 +22,14 @@ export default class Rom {
     // which brings us to our next topic. A ROM may not have any CHR banks (ie Zelda, Contra), ROMs such as these have the sprites stored in the PRG banks.
     // I haven't yet looked into extraction from there.
     if (chrRomBanks) {
-      const chrBytes = romBytes.slice(prgBytes.length, chrRomBanks * 8192)
+      const chrBytes = romBytes.slice(prgBytes.length, prgBytes.length + (chrRomBanks * 8192))
+      const sprites = []
+      for (let i = 0; i < chrRomBanks; i++) {
+        console.log('reading bank', i)
+        debugger
+      }
     }
+
 
     this.crc32  = crc32FromArrayBuffer(romBytes).toString(16)
     this.header = header
