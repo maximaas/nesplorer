@@ -1,5 +1,6 @@
 import crc32FromArrayBuffer from './crc32';
 import Header from './header'
+import Sprite from './sprite'
 
 export default class Rom {
   constructor(bytes) {
@@ -11,10 +12,13 @@ export default class Rom {
 
     const romBytes    = bytes.slice(16)
 
+    const _8K  =  8_192
+    const _16K = 16_384
+
     // Program data. All ROMs must contain at least one bank of PRG data.
     // This is the executable code that is stored for games/ demos.
     // Each bank is exactly 16K (16384 bytes)
-    const prgBytes = romBytes.slice(0, header.prgRomBanks * 16384)
+    const prgBytes = romBytes.slice(0, _16K * header.prgRomBanks)
 
     // Character data. Here be sprites. CHR data is just a block of sprites.
     // Each CHR bank can contain up to 512 sprites.
@@ -22,13 +26,24 @@ export default class Rom {
     // which brings us to our next topic. A ROM may not have any CHR banks (ie Zelda, Contra), ROMs such as these have the sprites stored in the PRG banks.
     // I haven't yet looked into extraction from there.
     if (chrRomBanks) {
-      const chrBytes = romBytes.slice(prgBytes.length, prgBytes.length + (chrRomBanks * 8192))
-      const sprites = []
+      const chrBytes = romBytes.slice(prgBytes.length, (_8K * chrRomBanks) + prgBytes.length)
+      const spriteData = []
+
       for (let i = 0; i < chrRomBanks; i++) {
-        console.log('reading bank', i)
-        debugger
+        const chrBytesPerBank = chrBytes.slice(_8K * i, _8K * (i + 1))
+
+        const sprites = []
+
+        for (let i = 0; i < 512; i++) {
+          sprites.push(new Sprite(chrBytesPerBank.slice(16 * i, 16 * (i + 1))))
+        }
+
+        spriteData.push(sprites)
+
       }
+      console.log(spriteData)
     }
+
 
 
     this.crc32  = crc32FromArrayBuffer(romBytes).toString(16)
