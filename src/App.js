@@ -16,9 +16,10 @@ class App extends React.Component {
 
         this.setState((prevState, props) => {
           return {
-            crc32:     rom.crc32,
-            romHeader: rom.header,
-            file:      file
+            crc32:      rom.crc32,
+            romHeader:  rom.header,
+            spriteData: rom.spriteData,
+            file:       file
           }
         })
       } catch (e) {

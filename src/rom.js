@@ -41,7 +41,8 @@ export default class Rom {
         spriteData.push(sprites)
 
       }
-      console.log(spriteData)
+
+      this.spriteData = spriteData
     }
 
 

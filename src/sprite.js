@@ -10,7 +10,7 @@ export default class Sprite {
         return parseInt(bitAsString)
       }) // 34 -> '100010' -> [1,0,0,0,1,0]
 
-      if (i % 2 === 0) {
+      if (i < 8) {
         channelA.push(bitsArray)
       } else {
         channelB.push(bitsArray)

@@ -1,11 +1,12 @@
 import React from 'react';
 import ExternalLink from './ExternalLink'
+import ChrBank      from './ChrBank'
 
 export default class RomData extends React.Component {
   render() {
     const { props } = this
 
-    const { romHeader, crc32 } = props
+    const { romHeader, crc32, spriteData } = props
 
     const romMapperLink = `https://wiki.nesdev.com/w/index.php/INES_Mapper_${romHeader.mapper.toString().padStart(3, '0')}`
 
@@ -88,6 +89,13 @@ export default class RomData extends React.Component {
             </tbody>
           </table>
         </fieldset>
+        <div className='spriteData'>
+          {romHeader.chrRomBanks &&
+            [...Array(romHeader.chrRomBanks)].map((e, i) => {
+              return(<ChrBank key={i} sprites={spriteData[i]} />)
+            })
+          }
+        </div>
       </div>
     )
   }
