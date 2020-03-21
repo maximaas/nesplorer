@@ -42,13 +42,10 @@ export default class Rom {
       }
 
       this.spriteData = spriteData
-      debugger
+      this.chrBytes = chrBytes
     }
-
-
 
     this.crc32  = crc32FromArrayBuffer(romBytes).toString(16)
     this.header = header
-
   }
 }
