@@ -23,7 +23,7 @@ class App extends React.Component {
           }
         })
       } catch (e) {
-         alert(e.message);  // invalid nes
+         console.log(e.message);  // invalid nes
       }
     });
     if (file) {

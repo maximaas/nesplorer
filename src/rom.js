@@ -39,10 +39,10 @@ export default class Rom {
         }
 
         spriteData.push(sprites)
-
       }
 
       this.spriteData = spriteData
+      debugger
     }
 
 
