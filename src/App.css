@@ -44,9 +44,14 @@ h1 {
   margin-bottom: 20px;
 }
 
+.spriteData {
+  height: 512px;
+  overflow-y: scroll;
+}
+
 canvas {
   width: 512px;
-  image-rendering: auto;
-  image-rendering: crisp-edges;
   image-rendering: pixelated;
+  background-color: #f5eac5;
+  margin: auto;
 }

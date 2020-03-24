@@ -88,14 +88,14 @@ export default class RomData extends React.Component {
             </tr>
             </tbody>
           </table>
+          <div className='spriteData'>
+            {romHeader.chrRomBanks &&
+              [...Array(romHeader.chrRomBanks)].map((e, i) => {
+                return(<ChrBank key={i} sprites={spriteData[i]} />)
+              })
+            }
+          </div>
         </fieldset>
-        <div className='spriteData'>
-          {romHeader.chrRomBanks &&
-            [...Array(romHeader.chrRomBanks)].map((e, i) => {
-              return(<ChrBank key={i} sprites={spriteData[i]} />)
-            })
-          }
-        </div>
       </div>
     )
   }

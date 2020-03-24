@@ -2,13 +2,11 @@ import React from 'react'
 
 
 // 512 x 8x8 sprites
-export default class  ChrBank extends React.Component {
+export default class ChrBank extends React.Component {
 
   render(){
     return(
-      <div style={{backgroundColor: 'rgb(77, 155, 251)', width: 512}}>
-        <canvas ref='canvas' width={128} height={256} />
-      </div>
+      <canvas ref='canvas' width={128} height={256} />
     )
   }
 
