@@ -3,17 +3,21 @@ import React from 'react'
 
 // 512 x 8x8 sprites
 export default class ChrBank extends React.Component {
+  spritesPerRow = 16
 
   render(){
+    const canvasWidth = this.spritesPerRow * 8
+    const canvasHeight = 4096 * 8 / canvasWidth
+
     return(
-      <canvas ref='canvas' width={128} height={256} />
+      <canvas ref='canvas' width={canvasWidth} height={canvasHeight} />
     )
   }
 
   componentDidMount() {
     const pallette = [
       [255,   255,   255,    0],
-      [172,   172,   172,    255],
+      [122,   172,   172,    255],
       [ 85,    85,    85,    255],
       [  0,     0,     0,    255]
     ]
@@ -21,6 +25,7 @@ export default class ChrBank extends React.Component {
     const canvas = this.refs.canvas
     const ctx    = canvas.getContext('2d')
     const sprites = this.props.sprites
+
 
     let x = 0
     let y = 0
@@ -39,8 +44,8 @@ export default class ChrBank extends React.Component {
 
       const imageData = new ImageData(new Uint8ClampedArray(data), 8)
 
-      x = (i % 16) * 8
-      y = Math.floor(i / 16) * 8
+      x = (i % this.spritesPerRow) * 8
+      y = Math.floor(i / this.spritesPerRow) * 8
 
       ctx.putImageData(imageData, x, y);
     })

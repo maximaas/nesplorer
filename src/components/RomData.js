@@ -22,6 +22,23 @@ export default class RomData extends React.Component {
     return (
       <div className='rom'>
         <fieldset>
+          <legend>CHR DATA</legend>
+          <div className='spriteData'>
+              {romHeader.chrRomBanks &&
+                [...Array(romHeader.chrRomBanks)].map((e, i) => {
+                  const key = [i, crc32].join('_')
+                  return(
+                    <div className='chrBank'>
+                      <b>Bank #{i}</b>
+                      <ChrBank key={key} sprites={spriteData[i]} />
+                    </div>
+                  )
+                })
+              }
+            </div>
+        </fieldset>
+
+        <fieldset>
         <legend>ROM DATA</legend>
 
         <table>
@@ -76,28 +93,6 @@ export default class RomData extends React.Component {
             </tr>
           </tbody>
         </table>
-        </fieldset>
-
-        <fieldset>
-          <legend>CHR DATA</legend>
-          <table>
-            <tbody>
-            <tr>
-              <td>chrRomBanks</td>
-              <td>{romHeader.chrRomBanks}</td>
-            </tr>
-            </tbody>
-          </table>
-          <div className='spriteData'>
-            {romHeader.chrRomBanks &&
-              [...Array(romHeader.chrRomBanks)].map((e, i) => {
-                const key = [i, crc32].join('_')
-                return(
-                  <ChrBank key={key} sprites={spriteData[i]}/>
-                )
-              })
-            }
-          </div>
         </fieldset>
       </div>
     )

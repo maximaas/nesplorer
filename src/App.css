@@ -1,6 +1,10 @@
-body {font-family: 'Share Tech Mono', monospace;width: 600px; margin: auto;}
+body {
+  font-family: 'Share Tech Mono', monospace;
+  margin-left: 30px;
+  margin-right: 30px
+}
+
 table {
-  margin: auto;
   width: 100%;
 }
 
@@ -16,10 +20,6 @@ table tr td:first-child {
   width: 150px;
 }
 
-.App {
-  width: 600px;
-  margin: auto;
-}
 
 fieldset {
   border: 1px solid #ccc;
@@ -45,13 +45,24 @@ h1 {
 }
 
 .spriteData {
-  height: 512px;
-  overflow-y: scroll;
+  margin: auto;
 }
 
+.chrBank {
+  display: inline-block;
+  padding: 15px;
+}
+
+canvas:hover {
+  transform-origin: 0 0;
+  transform: scale(2);
+}
+
+
 canvas {
-  width: 512px;
   image-rendering: pixelated;
-  background-color: #f5eac5;
-  margin: auto;
+  background-color: #fff;
+  display: block;
+  box-shadow: 3px 3px 10px #999;
+  transition: transform .1s; /* Animation */
 }
