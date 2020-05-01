@@ -28,9 +28,9 @@ export default class RomData extends React.Component {
                 [...Array(romHeader.chrRomBanks)].map((e, i) => {
                   const key = [i, crc32].join('_')
                   return(
-                    <div className='chrBank'>
+                    <div className='chrBank' key={key}>
                       <b>Bank #{i}</b>
-                      <ChrBank key={key} sprites={spriteData[i]} />
+                      <ChrBank index={i} sprites={spriteData[i]} />
                     </div>
                   )
                 })

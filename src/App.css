@@ -64,5 +64,6 @@ canvas {
   background-color: #fff;
   display: block;
   box-shadow: 3px 3px 10px #999;
-  transition: transform .1s; /* Animation */
+  transform-origin: 0 0;
+  transition: transform 0.3s; /* Animation */
 }

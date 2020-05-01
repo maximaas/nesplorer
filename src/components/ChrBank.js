@@ -5,12 +5,26 @@ import React from 'react'
 export default class ChrBank extends React.Component {
   spritesPerRow = 16
 
+  downloadAsPNG(canvas) {
+    const a = document.createElement("a");
+    document.body.appendChild(a);
+    const url = canvas.toDataURL("image/png");
+    a.href = url
+    a.download = `bank_${this.props.index}.png`
+    a.click()
+    window.URL.revokeObjectURL(url)
+    a.remove()
+  }
+
   render(){
     const canvasWidth = this.spritesPerRow * 8
     const canvasHeight = 4096 * 8 / canvasWidth
 
     return(
-      <canvas ref='canvas' width={canvasWidth} height={canvasHeight} />
+      <div>
+        <button onClick={(event) => { this.downloadAsPNG(this.refs.canvas) }}>PNG</button>
+        <canvas ref='canvas' width={canvasWidth} height={canvasHeight} />
+      </div>
     )
   }
 
