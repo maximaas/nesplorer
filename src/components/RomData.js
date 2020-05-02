@@ -1,12 +1,29 @@
-import React from 'react';
+import React        from 'react';
+
+import downloadAs   from '../utils'
+
+// components
 import ExternalLink from './ExternalLink'
 import ChrBank      from './ChrBank'
 
 export default class RomData extends React.Component {
+  downloadAsCHR() {
+    const { chrBytes, file } = this.props
+
+    if (chrBytes === undefined) {
+      throw new Error('chrBytes is not set')
+    }
+
+    const fileName = file.name.replace('.nes', '.chr')
+
+    const downloadURL = window.URL.createObjectURL(new Blob(chrBytes, {type: "octet/stream"}))
+    downloadAs(downloadURL, fileName)
+  }
+
   render() {
     const { props } = this
 
-    const { romHeader, crc32, spriteData } = props
+    const { romHeader, crc32, spriteData, chrBytes, file } = props
 
     const romMapperLink = `https://wiki.nesdev.com/w/index.php/INES_Mapper_${romHeader.mapper.toString().padStart(3, '0')}`
 
@@ -21,23 +38,6 @@ export default class RomData extends React.Component {
 
     return (
       <div className='rom'>
-        <fieldset>
-          <legend>CHR DATA</legend>
-          <div className='spriteData'>
-              {romHeader.chrRomBanks &&
-                [...Array(romHeader.chrRomBanks)].map((e, i) => {
-                  const key = [i, crc32].join('_')
-                  return(
-                    <div className='chrBank' key={key}>
-                      <b>Bank #{i}</b>
-                      <ChrBank index={i} sprites={spriteData[i]} />
-                    </div>
-                  )
-                })
-              }
-            </div>
-        </fieldset>
-
         <fieldset>
         <legend>ROM DATA</legend>
 
@@ -75,6 +75,17 @@ export default class RomData extends React.Component {
                 <td>{romHeader.prgRamBanks}</td>
               </tr>
             }
+
+            {romHeader.chrRomBanks > 0 &&
+              <tr>
+                <td>chrRomBanks</td>
+                <td>
+                  {romHeader.chrRomBanks}
+                  &nbsp;
+                  <button onClick={() => { this.downloadAsCHR() }}>CHR</button>
+                </td>
+              </tr>
+            }
             <tr>
               <td>fourScreenVram</td>
               <td>{romHeader.fourScreenVram ? 'YES': 'NO'}</td>
@@ -94,6 +105,25 @@ export default class RomData extends React.Component {
           </tbody>
         </table>
         </fieldset>
+
+        {romHeader.chrRomBanks > 0 &&
+          <fieldset>
+            <legend>CHR DATA</legend>
+            <div className='spriteData'>
+              {
+                [...Array(romHeader.chrRomBanks)].map((e, i) => {
+                  const key = [i, crc32].join('_')
+                  return(
+                    <div className='chrBank' key={key}>
+                      <b>Bank #{i}</b>
+                      <ChrBank index={i} sprites={spriteData[i]} />
+                    </div>
+                  )
+                })
+              }
+            </div>
+          </fieldset>
+        }
       </div>
     )
   }

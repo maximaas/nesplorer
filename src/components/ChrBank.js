@@ -1,19 +1,14 @@
-import React from 'react'
-
+import React      from 'react'
+import downloadAs from '../utils'
 
 // 512 x 8x8 sprites
 export default class ChrBank extends React.Component {
   spritesPerRow = 16
 
   downloadAsPNG(canvas) {
-    const a = document.createElement("a");
-    document.body.appendChild(a);
-    const url = canvas.toDataURL("image/png");
-    a.href = url
-    a.download = `bank_${this.props.index}.png`
-    a.click()
-    window.URL.revokeObjectURL(url)
-    a.remove()
+    const downloadURL = canvas.toDataURL("image/png");
+    const fileName    = `bank_${this.props.index}.png`
+    downloadAs(downloadURL, fileName)
   }
 
   render(){

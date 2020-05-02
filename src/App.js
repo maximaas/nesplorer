@@ -2,7 +2,6 @@ import React from 'react';
 import Rom from './rom'
 import RomData from './components/RomData'
 import ExternalLink from './components/ExternalLink'
-import Download from './components/Download'
 import './App.css';
 
 class App extends React.Component {
@@ -80,10 +79,6 @@ class App extends React.Component {
         </div>
         {state &&
           <RomData {...state} />
-        }
-
-        {state &&
-          <Download chrBytes={state.chrBytes} fileName={state.file.name.replace('.nes', '.chr')} />
         }
       </div>
     );
