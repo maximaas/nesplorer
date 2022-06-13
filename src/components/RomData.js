@@ -7,6 +7,10 @@ import ExternalLink from './ExternalLink'
 import ChrBank      from './ChrBank'
 
 export default class RomData extends React.Component {
+  state = {
+    spritesPerRow: 16
+  }
+
   downloadAsCHR() {
     const { chrBytes, file } = this.props
 
@@ -20,10 +24,20 @@ export default class RomData extends React.Component {
     downloadAs(downloadURL, fileName)
   }
 
+  setSpritesPerRow(spritesPerRow) {
+    this.setState((prevState, props) => {
+      return {
+        spritesPerRow: spritesPerRow
+      }
+    })
+  }
+
   render() {
     const { props } = this
 
     const { romHeader, crc32, spriteData, chrBytes, file } = props
+
+    const { spritesPerRow } = this.state
 
     const romMapperLink = `https://wiki.nesdev.com/w/index.php/INES_Mapper_${romHeader.mapper.toString().padStart(3, '0')}`
 
@@ -109,6 +123,14 @@ export default class RomData extends React.Component {
         {romHeader.chrRomBanks > 0 &&
           <fieldset>
             <legend>CHR DATA</legend>
+            <button onClick={() => this.setSpritesPerRow(2)}>2x256 tiles</button>
+            <button onClick={() => this.setSpritesPerRow(4)}>4x128 tiles</button>
+            <button onClick={() => this.setSpritesPerRow(8)}>8x64 tiles</button>
+            <button onClick={() => this.setSpritesPerRow(16)}>16x32 tiles</button>
+            <button onClick={() => this.setSpritesPerRow(32)}>32x16 tiles</button>
+            <button onClick={() => this.setSpritesPerRow(64)}>64x8 tiles</button>
+            <button onClick={() => this.setSpritesPerRow(128)}>128x4 tiles</button>
+            <button onClick={() => this.setSpritesPerRow(256)}>256x2 tiles</button>
             <div className='spriteData'>
               {
                 [...Array(romHeader.chrRomBanks)].map((e, i) => {
@@ -116,7 +138,7 @@ export default class RomData extends React.Component {
                   return(
                     <div className='chrBank' key={key}>
                       <b>Bank #{i}</b>
-                      <ChrBank index={i} sprites={spriteData[i]} />
+                      <ChrBank index={i} sprites={spriteData[i]} spritesPerRow={spritesPerRow} />
                     </div>
                   )
                 })
